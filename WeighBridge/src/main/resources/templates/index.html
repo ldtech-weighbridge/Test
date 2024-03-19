@@ -128,7 +128,7 @@
 
             $.ajax({
                 type: 'POST',
-                url: '/check?role=' + role + '&userId=' + uid + '&password=' + password,
+                url: './check?role=' + role + '&userId=' + uid + '&password=' + password,
                 success: function(response) {
                     // Assuming the response contains the redirection URL
                     var redirectURL = response;
@@ -138,22 +138,22 @@
                     if(redirectURL===str){
                     switch (role) {
 						case 'admin':
-							window.location.href = '/getAdmin';
+							window.location.href = './getAdmin';
 							break;
 						case 'supervisor':
-							window.location.href = '/supervisor-page.html';
+							window.location.href = './supervisor-page.html';
 							break;
 						case 'truckDetails':
-							window.location.href = '/truck-details-page.html';
+							window.location.href = './truck-details-page.html';
 							break;
 						case 'manager':
-							window.location.href = '/manager-page.html';
+							window.location.href = './manager-page.html';
 							break;
 						case 'vendor':
-							window.location.href = '/vendor-page.html';
+							window.location.href = './vendor-page.html';
 							break;
 						case 'qc':
-							window.location.href = '/qc-page.html';
+							window.location.href = './qc-page.html';
 							break;
 					
 						default:
