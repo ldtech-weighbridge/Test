@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add User Dashboard</title>
+    <style>
+        /* Your styling for the add_user_dashboard.html page goes here */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .form-container {
+            max-width: 400px; /* Decreased width */
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        input,
+        select {
+            width: calc(100% - 20px); /* Adjusted width to keep it constant */
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            width: 100%; /* Make button width same as input boxes */
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="form-container">
+        <h2>Add User</h2>
+        <form id="userForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="role">Role:</label>
+            <select id="role" name="role" required>
+                <option value="manager">Manager</option>
+                <option value="supervisor">Supervisor</option>
+                <!-- Add more roles as needed -->
+            </select>
+
+            <label for="responsibility">Responsibility:</label>
+            <input type="text" id="responsibility" name="responsibility" required>
+
+            <label for="contactNo">ContactNo:</label>
+            <input type="tel" id="contactNo" name="contactNo" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date" required>
+
+            <button type="button" onclick="saveUser()">Save</button>
+        </form>
+    </div>
+
+    <script>
+        function saveUser() {
+            // Get form data
+            const formData = new FormData(document.getElementById('userForm'));
+
+            // Create an object to store user details
+            const userDetails = {};
+            formData.forEach((value, key) => {
+                userDetails[key] = value;
+            });
+
+            // Store user details in localStorage
+            localStorage.setItem('newUser', JSON.stringify(userDetails));
+
+            // Redirect to admin-page.html
+            window.location.href = '/getAdmin';
+        }
+    </script>
+
+</body>
+
+</html>

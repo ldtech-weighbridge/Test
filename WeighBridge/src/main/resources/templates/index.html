@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WeighBridge Management App - Login</title>
+    <style>
+		body {
+		            font-family: Arial, sans-serif;
+		            margin: 0;
+		            padding: 0;
+		            height: 100vh;
+		            background: url('https://wallpaperaccess.com/full/2314950.jpg') no-repeat center center fixed;
+		            -webkit-background-size: cover;
+		            -moz-background-size: cover;
+		            -o-background-size: cover;
+		            background-size: cover;
+		            color: white;
+		            display: flex;
+		            justify-content: center;
+		            align-items: center;
+		        }
+
+        .logo-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            width: 80px; /* Adjust as needed */
+            height: auto;
+        }
+
+        .login-container {
+            background: linear-gradient(to bottom, #0074D9, #001F3F);
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 300px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+		.form-group input {
+            width: calc(100% - 20px); /* Adjust the width as needed */
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #ffffff; /* Text color for labels */
+        }
+
+        select, input {
+            width: 100%; /* Set width to 100% for both select and input elements */
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff; /* Background color for input fields */
+        }
+
+        button {
+            background-color: #0056B3;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+			margin-left: 100px;
+        }
+
+        button:hover {
+            background-color: #0056B3;
+        }
+
+        h2 {
+            margin-left: 10px;
+            color: #ffffff; /* Text color for headings */
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo-container">
+            <img class="logo" src="https://ldtech.in/wp-content/uploads/2024/01/logo.png" alt="WeighBridge Management App Logo">
+        </div>
+        <h2>WeighBridge App Login</h2>
+        <div class="form-group">
+            <form id="myLoginForm">
+                <label for="role">Role:</label>
+                <select id="role" name="role">
+                    <option value="admin">Admin</option>
+                    <option value="supervisor">Supervisor</option>
+                    <option value="truckDetails">TruckDetails</option>
+                    <option value="manager">Manager</option>
+                    <option value="vendor">Vendor</option>
+                    <option value="qc">Qc</option>
+                </select>
+                <div>
+                    <label for="userId">UserId:</label>
+                    <input type="text" id="userId" name="userId" required>
+                </div>
+                <div>
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="button" onclick="submitmyForm()">Login</button>
+            </form>
+        </div>
+    </div>
+     <script>
+        function submitmyForm() {
+            console.log("sss");
+            var role = $('#role').val();
+            var uid = $('#userId').val();
+            var password = $('#password').val();
+            console.log("hey");
+
+            $.ajax({
+                type: 'POST',
+                url: '/check?role=' + role + '&userId=' + uid + '&password=' + password,
+                success: function(response) {
+                    // Assuming the response contains the redirection URL
+                    var redirectURL = response;
+                    var str="Login successful!";
+
+                    // Redirect based on the role
+                    if(redirectURL===str){
+                    switch (role) {
+						case 'admin':
+							window.location.href = '/getAdmin';
+							break;
+						case 'supervisor':
+							window.location.href = '/supervisor-page.html';
+							break;
+						case 'truckDetails':
+							window.location.href = '/truck-details-page.html';
+							break;
+						case 'manager':
+							window.location.href = '/manager-page.html';
+							break;
+						case 'vendor':
+							window.location.href = '/vendor-page.html';
+							break;
+						case 'qc':
+							window.location.href = '/qc-page.html';
+							break;
+					
+						default:
+							console.error('Invalid role:', role);
+					}
+					}
+					else{
+						alert(redirectURL);
+					}
+
+                },
+                error: function(error) {
+                    console.error("Error submitting the form:", error);
+                }
+            });
+        }
+    </script>
+</body>
+</html>
